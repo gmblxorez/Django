@@ -1,0 +1,56 @@
+.header {
+    position: fixed;
+    width: 100%;
+    border-bottom: 1px solid;
+    z-index: 1;
+    height: 6%;
+    display: flex;
+    padding: 0 10 0 10;
+    background-image: url('https://modnica.club/uploads/posts/2021-11/1635770217_1-modnica-club-p-gradient-goluboi-fioletovii-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.left_side, .right_side, .middle {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+}
+
+.left_side {
+    width: 30%;
+}
+
+.right_side {
+    width: 30%;
+    justify-content: flex-end;
+}
+
+.middle {
+    width: 40%;
+    padding: 0 300 0 10;
+    justify-content: center;
+    font-family:  Lucida Sans Unicode, sans-serif;
+}
+
+.btn, .log_out_form {
+    margin: 0 10px 0 10px;
+}
+
+.ico {
+    display: flex;
+    margin: auto;
+    color: white;
+    text-shadow: 2px 1px 1px black;
+    white-space: nowrap;
+}
+
+.image-con {
+width: 200px;
+height: 200px;
+}
+
+
+

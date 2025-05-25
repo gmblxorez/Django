@@ -1,0 +1,48 @@
+{% extends 'blog/layout1.html' %}
+{% load static %}
+{% block title %} Профиль {% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section>
+            <h2>Информация о пользователе <a href="{% url 'users:profile_update' %}"><i class="fa fa-edit"></i></a></h2>
+            <a><strong>Имя пользователя: </strong>{% if user.username %}{{ user.username }}{% else %}---{% endif %} </a><br>
+            <a><strong>Электронная почта: </strong>{% if user.email %}{{ user.email }}{% else %}---{% endif %} </a><br>
+            <a><strong>Имя: </strong>{% if user.first_name %}{{ user.first_name }}{% else %}---{% endif %} </a><br>
+            <a><strong>Фамилия: </strong>{% if user.last_name %}{{ user.last_name }}{% else %}---{% endif %} </a><br>
+            <a><strong>Дата регистрации: </strong>{% if user.date_joined %}{{ user.date_joined }}{% else %}---{% endif %} </a><br>
+            {% if user.is_staff %}
+                <a><strong>Администратор: </strong>{% if user.is_staff %}Да{% else %}Нет{% endif %} </a><br>
+                <a><strong>Суперпользователь: </strong>{% if user.is_superuser %}Да{% else %}Нет{% endif %} </a><br>
+            {% endif %}
+        </section>
+        <section class="user-blogs">
+            <h2>Новости пользователя</h2>
+            {% if user_blogs %}
+                <div class="blogs">
+                     {% for blog in user_blogs %}
+                        <a href="{% url 'blog:blog_detail' blog.id %}"> {{ blog.title }}</a>
+                     {% endfor %}
+                </div>
+            {% else %}
+            <a>Пользователь еще не написал ни одной новости</a>
+            {% endif %}
+        </section>
+         <section class="user-comments">
+            <h2>Комментарии пользователя</h2>
+            {% if user_comments %}
+                <div class="comments">
+                    {% for comment in user_comments %}
+                    <a href="{% url 'blog:blog_detail' comment.blog.id %}"> {{ comment.text }}</a><br>
+                    {% endfor %}
+                </div>
+            {% else %}
+            <a>Пользователь еще не написал ни одного комментария</a>
+            {% endif %}
+    </section>
+    </main>
+{% endblock %}

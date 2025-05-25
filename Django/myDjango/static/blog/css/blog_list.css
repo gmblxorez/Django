@@ -1,0 +1,86 @@
+.list {
+    width: 100%
+}
+
+.blog {
+    display: flex;
+    width: 94%;
+    height: 15%;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 25px;
+    margin: 1% 0 0 3%;
+}
+
+.blog a {
+    color: black;
+    text-decoration: none;
+    font-size: 50;
+    margin-right: 10px;
+}
+
+.content {
+    width: 25%;
+    border-right: 1px solid;
+    margin-right: 1%;
+}
+
+.content:hover {
+    transition: all 400ms ease-in-out;
+    text-shadow: #9d00ff 1px 0 20px;
+}
+
+.blog_info {
+    width: 30%;
+    align-items: flex-end
+}
+
+.blog_info a {
+    font-size: 20;
+
+}
+
+form {
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.pagination .step-links {
+  display: flex;
+  gap: 0.5em;
+}
+
+.pagination a,
+.pagination span {
+  color: #7f00ff;
+  text-decoration: none;
+  padding: 0.5em 0.75em;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25em;
+  background-color: #f8f9fa;
+  margin: 0 0.15em;
+}
+
+.pagination a:hover {
+  background-color: #e2e6ea;
+}
+
+.pagination .current {
+  font-weight: bold;
+  background-color: #7f00ff;
+  color: white;
+  border: 1px solid #7f00ff;
+}
+
+.pagination a.disabled {
+  pointer-events: none;
+  color: 7f00ff;
+}

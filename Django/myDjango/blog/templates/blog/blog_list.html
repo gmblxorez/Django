@@ -1,0 +1,63 @@
+{% extends 'blog/layout1.html' %}
+{% load static %}
+{% block title %} Новости {% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'blog/css/blog_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if perms.blog.add_blog %}
+    <a class="btn btn-success" href="{% url 'blog:create_blog' %}"
+       style="margin: 1% 0 0 2%">
+        Создать новость</a>
+    {% endif %}
+    <form method="GET">
+        <input type="text" name="search" placeholder="Поиск">
+        <input type="submit" value="Найти">
+    </form>
+    <div class="list">
+        {% for blog in page_obj %}
+        <div class="blog"
+        style="
+            background-image: linear-gradient(90deg, white, white, transparent),
+            url({{ blog.image.url }});
+            background-position: right;">
+            <div class="content">
+                <a href="{{ blog.get_absolute_url }}"> {{blog.title}} </a>
+            </div>
+            <div class="blog_info">
+                <a>{{ blog.content | truncatechars:52}}</a>
+            </div>
+             <a style="color: gray">by {{ blog.author }}</a>
+             {% if blog.author == request.user or request.user.is_superuser %}
+                 <a class="btn btn-outline-warning"
+                    href="{% url 'blog:update_blog' pk=blog.id %} "
+                    style="margin: 1% 0 0 2%"><i class="fa fa-pen"></i></a>
+                 <a class="btn btn-outline-danger"
+                    href="{% url 'blog:delete_blog' pk=blog.id %} "
+                    style="margin: 1% 0 0 2%"><i class="fa fa-trash"></i></a>
+             {% endif %}
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя »</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

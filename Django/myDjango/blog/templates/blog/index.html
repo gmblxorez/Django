@@ -1,0 +1,31 @@
+{% extends 'blog/layout1.html' %}
+{% load static %}
+{% block title %} Главная страница {% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="welcome-message fs-2">
+    <p>Добро пожаловать на мой сайт!</p>
+    <p>Я очень рад, что вы посетили его. Надеюсь, он вам понравится.</p>
+    <p>Если хотите узнать о нас больше, перейдите на вкладку "Контакты".</p>
+</div>
+<div class="latest-news container" style="width: 100%;">
+    <a class=" text-black bg-light fs-2 position-static text-decoration-none content" style="opacity: 0.8;"> Последние новости:</a>
+    {% for blog in latest_blogs %}
+        <div class="rounded-3 bg-light news-item d-flex flex-row gap-5 my-4" style="opacity: 0.8;">
+             <a class="text-black fs-3 text-decoration-none content" href="{% url 'blog:blog_detail' pk=blog.pk %}">{{ blog.title }}</a>
+           <div class="image-con">
+               <img class="object-fit-cover w-100 h-100" src="{{ blog.image.url }}" alt="{{ blog.title }}" >
+           </div>
+            <div class="blog_info fs-4">
+                <a>{{ blog.content | truncatechars:52}}</a>
+            </div>
+            <p>{{ blog.summary }}</p>
+            <p class="text-black" >Опубликовано: {{ blog.date_published|date:"d M Y" }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

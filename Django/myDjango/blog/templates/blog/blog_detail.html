@@ -1,0 +1,51 @@
+{% extends 'blog/layout1.html' %}
+{% load static %}
+{% block title %} Новости {% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'blog/css/blog_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="blog_detail">
+      <a class="arrow btn btn-light" href="{% url 'blog:blog_detail' pk=blog.id %}?post=prev">
+          <i class="fa fa-angle-left"></i></a>
+      <div class="content">
+                <img src="{{ blog.image.url }}">
+                <div class="blog_text"><a>{{ blog.content|linebreaks }}</a></div>
+                <div class="blog_info">
+                    <a>by {{ blog.author }}</a>
+                    <a>{{ blog.date_published}}</a>
+          </div>
+      </div>
+      <div class="comments">
+          {% if user.is_authenticated %}
+            <div class="com_form" >
+                 <h3 style="margin: 0 0 10 38;">Ваш комментарий</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success" style="margin: 0 20 0 110;"> Отправить </button>
+                </form>
+            </div>
+          {% else %}
+                <h3>Авторизуйтесь, чтобы оставить комментарий</h3>
+          {% endif %}
+          {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <a style="font-size: 30;"><img src="{% static 'blog/img/user.png' %}"
+                      style="width: 40px; margin-right: 10px">
+                        {{ comment.author }}</a>
+                    <a>{{ comment.text }}</a>
+                    <a style="align-self: flex-end">{{ comment.date_published }}</a>
+                </div>
+            {% endfor %}
+          {% else %}
+            <a class="no_comments">Комментариев пока нет</a>
+          {% endif %}
+      </div>
+       <a class="arrow btn btn-light" href="{% url 'blog:blog_detail' pk=blog.id %}?post=next">
+           <i class="fa fa-angle-right"></i></a>
+  </div>
+{% endblock %}

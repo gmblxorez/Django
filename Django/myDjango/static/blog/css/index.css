@@ -1,0 +1,9 @@
+.content:hover {
+    transition: all 400ms ease-in-out;
+    text-shadow: #9d00ff 1px 0 20px;
+}
+.welcome-message {
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 3px black;
+}

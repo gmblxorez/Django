@@ -1,0 +1,30 @@
+{% extends 'blog/layout1.html' %}
+
+{% load static %}
+{% block title %} Контакты {% endblock %}
+
+{% block static %}
+
+{% endblock %}
+
+{% block content %}
+<div style="
+    margin-bottom: 2%;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;">
+
+   <div class="fs-12">
+        <p style=" padding: 10px;">О нас: Добро пожаловать в мир "Ведьмачьих новостей" — вашего надежного источника новостей из мира Ведьмака.<br>
+            Мы — команда энтузиастов и экспертов, посвятивших себя отслеживанию самых свежих и захватывающих событий, которые происходят на континенте и за его пределами.
+        </p>
+        <p style=" padding: 10px;">Название компании: {{ company_name }}</p>
+        <p style=" padding: 10px;">Адрес: {{ address }}</p>
+        <p style=" padding: 10px;">Телефон: {{ phone_number }}</p>
+        <p style=" padding: 10px;">Email: {{ email }}</p>
+   </div>
+</div>
+
+{% endblock %}
